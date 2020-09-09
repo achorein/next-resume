@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BackendService from '../../services/Backend.service';
 
-class SectionOneMissionIAtodayBloc extends Component {
+class SectionReferencesTodayBloc extends Component {
 
     constructor(props) {
         super(props);
@@ -36,20 +36,7 @@ class SectionOneMissionIAtodayBloc extends Component {
         const { casClients, infoMessage, errorMessage } = this.state;
  
 
-    // this.titreCasUtilisation= titreCasUtilisation;
-    // this.subtitleCasUtilisation= subtitleCasUtilisation;
-    // this.descriptionCasUtilisation = descriptionCasUtilisation;
-    // this.adresseImageCasUtilisation = adresseImageCasUtilisation;
-    //   this.id = id ;
-    //   this.permaliens = permaliens; 
-    //   this.vedette = vedette; 
-    //   this.etatFiche = etatFiche; 
-
-        // let data = [
-        //     {bgUrl: "machine.jpg", contentTitle: 'Traitement automatique des requêtes clients', contentDesc: 'Le Crédit Mutuel a économisé 200 000 jours homme dans le traitement automatique des requêtes clients.'},
-        //     {bgUrl: "logistique.jpg", contentTitle: 'Logistique : 50% de gain d’espace', contentDesc: 'I.A permet une autonomie sur l’ensemble de la chaine logistique notamment grâce à la prédiction des volumes d’expédition ou du stockage nécessaire.'},
-        //     {bgUrl: "candidat.jpg", contentTitle: 'Meilleur ciblage des candidats', contentDesc: 'Comme le dit d’ailleurs le DRH de Michelin, Jean-Michel Guillon : « Nous aurons demain grâce à l’IA la possibilité de cibler beaucoup plus facilement les candidats potentiels ».'}
-        // ];
+ 
 
         let Datalist = casClients.map((casClient, i)=>{
             return(
@@ -105,4 +92,4 @@ class SectionOneMissionIAtodayBloc extends Component {
     }
 }
 
-export default SectionOneMissionIAtodayBloc;
+export default SectionReferencesTodayBloc;

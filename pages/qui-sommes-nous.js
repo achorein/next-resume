@@ -13,7 +13,7 @@ class Quisommesnous extends Component {
     render() {
 
       const meta = {
-        title: 'Devenez partenaire IA de Safiyoudine.fr',
+        title: 'Devenez partenaire avec Safiyoudine.fr',
         description: ' Devenir partenaire safiyoudine',
         canonical: 'https://www.safiyoudine.fr/pourquoi-devenir-editeur-partenaire',
         meta: {

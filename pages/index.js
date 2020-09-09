@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
  import NavBar from '../components/Layouts/NavbarTwo'
 import HeroSliderThree from '../components/0-HomePage/HeroSliderThree'
-import SectionOneMissionIAtodayBloc from '../components/0-HomePage/SectionOneMissionIAtodayBloc'
+import SectionReferencesTodayBloc from '../components/0-HomePage/SectionReferencesTodayBloc'
 import SectionPrestationList from '../components/0-HomePage/SectionPrestationList'; 
  import CookiesModalSimple from '../components/Layouts/CookiesModalSimple'
 import DocumentMeta from 'react-document-meta';
@@ -32,7 +32,7 @@ class Index extends Component {
 
                 <CookiesModalSimple />
                  <HeroSliderThree />
-                 <SectionOneMissionIAtodayBloc  background="grey-bg" />
+                 <SectionReferencesTodayBloc  background="grey-bg" />
                 <SectionPrestationList />
         
 

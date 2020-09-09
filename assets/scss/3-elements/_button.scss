@@ -1,0 +1,131 @@
+
+/*=============================================
+=            Button            =
+=============================================*/
+
+.ht-btn{
+
+    &--default{
+        display: inline-block;
+        font-size: 14px;
+        line-height: 2;
+        padding: 10px 40px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: $white;
+        background-color: #00509d;
+        transition: $transition--cubic;
+
+        &:hover, &:focus{
+            background-color: #00509d ;
+            color: $white;
+
+        }
+
+        &--dark-hover{
+            &:hover, &:focus{
+                background-color: $theme-color--black;
+                color: $white;
+    
+            }
+        }
+    }
+
+    &--round{
+        font-size: 13px;
+        padding: 10px 50px;
+        background-color: #00509d;
+        color: $white;
+        border-radius: 100px;
+        transition: $transition--cubic;
+        &:hover, &:focus{
+            background-color: $theme-color--black;
+            color: $white;
+        }
+    }
+
+    &--round-min{
+        font-size: 13px;
+        padding: 15px 50px;
+        margin-left: 10px;
+        background-color: #00509d;
+        color: $white;
+        border-radius: 100px;
+        transition: $transition--cubic;
+        &:hover, &:focus{
+            background-color: $theme-color--black;
+            color: $white;
+        }
+    }
+
+    &--round2{
+        font-size: 13px;
+        padding: 10px 50px;
+        background-color: transparent;
+        color: #f8961e;
+        border-color: #f8961e;
+        border: 2px solid ;
+        border-radius: 100px;
+        transition: $transition--cubic;
+        &:hover, &:focus{
+            background-color: #f8961e;
+            color: $white;
+        }
+    }
+    
+    &--round3{
+        font-size: 13px;
+        padding: 15px 50px;
+        background-color: #f8961e;
+        color: white; 
+                border-color: #f8961e;
+        border: 2px solid ;
+        border-radius: 100px;
+        transition: $transition--cubic;
+        &:hover, &:focus{
+            background-color: black;
+            color: $white;
+        }
+    }
+    &--round-blue-3{
+        font-size: 13px;
+        padding: 10px 50px;
+        background-color: #f8961e;
+        color: white; 
+                border-color: #f8961e;
+        border: 2px solid ;
+        border-radius: 100px;
+        transition: $transition--cubic;
+        &:hover, &:focus{
+            background-color: black;
+            color: $white;
+        }
+    }
+}
+
+.see-more-link{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    color: #393939;
+    transition: $transition--cubic;
+     background: none;
+    border: none;
+    &:hover{
+        color: #00509d;
+     }
+
+    &--color{
+        color: #00509d;
+        &:hover{
+            color: #393939;
+        }
+    }
+}
+
+/*=====  End of Button  ======*/
+
+
+.img-fluid-2 {
+padding-right:10px; 
+}

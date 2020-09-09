@@ -1,0 +1,74 @@
+
+/*=============================================
+=            feature icon            =
+=============================================*/
+
+.feature-icon-wrapper{
+    margin-bottom: -300px;
+    padding : 40px 40px 40px 40px ;
+    box-shadow: 0 1px 15.36px 0.64px rgba(0, 0, 0, 0.2);
+    background-color: white;
+
+
+    @media #{$tablet-device}{
+        padding : 20px 20px 20px 20px ;
+    }
+    @media #{$large-mobile}{
+    }
+    @media #{$small-mobile}{
+        padding : 20px 20px 20px 20px ;
+    }
+    @media #{$extra-small-mobile}{
+ 
+    }
+}
+
+.specia-padding {
+    padding: 0px 60px 0px 61px;
+    @media #{$tablet-device}{
+        padding : 20px 20px 20px 20px ;
+    }
+    @media #{$large-mobile}{
+    }
+    @media #{$small-mobile}{
+        padding : 10px 10px 10px 10px ;
+    }
+    @media #{$extra-small-mobile}{
+ 
+    }
+}
+
+.single-feature-icon{
+    margin-bottom: 30px;
+
+    &__image{
+        margin-bottom: 20px;
+     }
+
+    &__title{
+        font-size: 18px;
+        line-height: 1.3;
+        color: #001b68;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    &__title-blue{
+        font-size: 18px;
+        line-height: 1.3;
+        color: #f8961e;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+
+    &__content{
+        color: #001b68;
+         text-align: center;
+         font-weight: 500;
+
+    }
+}
+
+/*=====  End of feature icon  001b68 ======*/
+

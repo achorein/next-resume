@@ -1,0 +1,111 @@
+
+/*=============================================
+=            backgrounds            =
+=============================================*/
+
+
+/* background images */
+
+.funfact-bg{
+    background-image: url("/assets/img/backgrounds/funfact-bg.jpg");
+}
+
+.testimonial-slider-area-bg{
+    background-image: url("/assets/img/backgrounds/testimonial.jpg");
+}
+
+.breadcrumb-bg{
+    background-image: url("/assets/img/backgrounds/slider-main.jpg");
+}
+
+.white-bg{
+    background-color: #ffffff;
+}
+// ==> #f7f7f7
+
+.grey-bg{
+    background-color: #f7f7f7;
+    &--style2{
+        background-color: #f7f7f7;
+    }
+    &--style3{
+        background-color: #f7f7f7;
+    }
+}
+
+
+.grey-dark-bg{
+    background-color: #dbdbdb;
+    &--style2{
+        background-color: #dbdbdb;
+    }
+    &--style3{
+        background-color: #dbdbdb;
+    }
+}
+
+.blue-bg{
+    background-color: #4c4397;
+    &--style2{
+        background-color: #eeeeee;
+    }
+    &--style3{
+        background-color: #4c4397;
+    }
+}
+
+
+.blue-light-bg{
+    background-color: #003049;
+    &--style2{
+        background-color: #003049;
+    }
+    &--style3{
+        background-color: #003049;
+    }
+}
+
+.white-font{
+    color : white; 
+}
+
+
+.dark-blue-bg{
+    background-color: #091379;
+    &--style2{
+        background-color: #091379;
+    }
+    &--style3{
+        background-color: $theme-color--black;
+    }
+    &--style4{
+        background-color: #06112C;
+    }
+    &--style5{
+        background-color: #05103B;
+    }
+}
+
+
+.dark-bg{
+    background-color: #111;
+    &--style2{
+        background-color: #11202D;
+    }
+    &--style3{
+        background-color: $theme-color--black;
+    }
+    &--style4{
+        background-color: #06112C;
+    }
+    &--style5{
+        background-color: #05103B;
+    }
+}
+
+.default-bg{
+    background-color: $theme-color--default;
+}
+
+/*=====  End of backgrounds  ======*/
+

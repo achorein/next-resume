@@ -1,34 +1,27 @@
- import axios from 'axios';
-import NavBar from '../../components/Layouts/NavbarOtherPage'
- 
+import axios from 'axios';
 import { useRouter } from 'next/router'
 
- 
-
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import DocumentMeta from 'react-document-meta';
+import Swal from 'sweetalert2';
 import ModalVideo from 'react-modal-video'
 
- 
+import NavBar from '../../components/Layouts/NavbarOtherPage'
 import Breadcrumbs from '../../components/Layouts/Breadcrumbs'
- import DocumentMeta from 'react-document-meta';
- import Swal from 'sweetalert2';
- import Error from '../error';
+import Error from '../error';
 
-
- import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import BackendService from '../../services/Backend.service';
 
 const openModal = () => {
     this.setState({isOpen: false})
 }; 
 
-
 function isOpen (){
     this.setState({isOpen: false})
 }
 
-
 const Prestations = ({ fiche }) => {
 
-    console.log(fiche)
     const meta = {
         title: fiche.metadataSeoTitlePage,
         description: fiche.metadataSeoDescriptionPage,
@@ -112,50 +105,32 @@ const Prestations = ({ fiche }) => {
     );
 }
 
-Prestations.getInitialProps = async ({ query: {id}, res }) => {
-   console.log(id)
-    const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/services/permaliens?permaliens=`+id ;
- //   const payload = { params: { id } }
-    // const response = await axios.get(url);
- 
-    // Swal.fire(
-    //     'Super!',
-    //     'Votre message est envoyé' + response.status,
-    //     'success'
-    // )
+/**
+ * Récupération de la liste des routes dynamique (id de chaque route)
+ * https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+ */
+export async function getStaticPaths() {
+    const { data : servicesList} = await BackendService.findServicesAll();
+    return {
+        paths: servicesList.map(fiche => ({
+            params: { id: fiche.permaliens },
+        })),
+        fallback: false // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
+    };
+}
 
-    // if(response){
-    //     console.log(response)
-    //     return {
-    //          fiche: response.data[0]
-    //     }
-    
-    // }
-
-
-    try {
-        // fetch data from a url endpoint
-        const response = await axios.get(url);
-         return {
-            fiche: response.data[0]
-       }
-
-      } catch (error) {
-    //    alert(error); // catches both errors
-     //   console.log("error", error);
-        // appropriately handle the error
-      //  window.location.href= "/error"
-      //  return fiche ; 
-
+/**
+ * Récupération des informations pour un id spécifique
+ * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+ */
+export async function getStaticProps({params}) {
+    const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/services/permaliens?permaliens=`+params.id ;
+    const { data: fiches } = await axios.get(url);
+    return {
+      props: {
+        fiche: fiches[0]
+      }
     }
-
-    // if (res) {
-    //     res.statusCode = 404
-    //     res.end('Not found')
-    //     return
-    //  }
-
-    
 }
 
 export default Prestations;

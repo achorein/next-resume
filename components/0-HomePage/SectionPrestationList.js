@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link'
 import BackendService from '../../services/Backend.service';
 
 class SectionPrestationList extends Component {
@@ -21,21 +22,11 @@ class SectionPrestationList extends Component {
             products: { loading: true }
         });
 
-        BackendService.findAllServicesVedette().
-            then(servicesList => {
-                this.setState({ servicesList: servicesList.data });
-            });
    }
 
-
-
-    detail(product) {
- 
-       window.location.href= "/prestations/"+product.permaliens
-    }
-
     render() {
-        const { servicesList, infoMessage, errorMessage } = this.state;
+        const { servicesList } = this.props;
+        const { infoMessage, errorMessage } = this.state;
  
 
         let Fichelist = servicesList.map((fiche, i)=> {
@@ -50,7 +41,7 @@ class SectionPrestationList extends Component {
                                 </a>
                                 <div className="service-grid-item__content">
                             <h3 className="title">
-                                <a onClick={() => this.detail(fiche)}>{fiche.titrePage} - {fiche.nomEntreprise}</a>
+                                <Link href={`/prestations/${fiche.permaliens}`}><a>{fiche.titrePage} - {fiche.nomEntreprise}</a></Link>
                             </h3>
                             <p>{fiche.phraseAccroche}</p>
                         </div>
@@ -87,7 +78,7 @@ class SectionPrestationList extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="section-title-area text-center">
-                                <a href='/prestations' className="ht-btn ht-btn--round2">VOIR LES SERVICES </a>
+                                    <Link href='/prestations' className="ht-btn ht-btn--round2"><a>VOIR LES SERVICES</a></Link>
                                 </div>
                             </div>
                         </div>

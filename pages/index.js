@@ -5,10 +5,11 @@ import SectionReferencesTodayBloc from '../components/0-HomePage/SectionReferenc
 import SectionPrestationList from '../components/0-HomePage/SectionPrestationList'; 
  import CookiesModalSimple from '../components/Layouts/CookiesModalSimple'
 import DocumentMeta from 'react-document-meta';
+import BackendService from '../services/Backend.service';
 
 class Index extends Component {
     render() {
-
+        const { casClients, servicesList } = this.props;
         const meta = {
             title: 'Safiyoudine',
             description: 'Safiyoudine',
@@ -23,22 +24,33 @@ class Index extends Component {
 
 
         return (
-            <React.Fragment>
-             <DocumentMeta {...meta}>
-               </DocumentMeta>
+          <React.Fragment>
+             <DocumentMeta {...meta} />
        
-               <NavBar />
+              <NavBar />
 
-
-                <CookiesModalSimple />
-                 <HeroSliderThree />
-                 <SectionReferencesTodayBloc  background="grey-bg" />
-                <SectionPrestationList />
-        
-
-            </React.Fragment>
+              <CookiesModalSimple />
+              <HeroSliderThree />
+              <SectionReferencesTodayBloc casClients={casClients} background="grey-bg" />
+              <SectionPrestationList servicesList={servicesList} />
+          </React.Fragment>
         );
     }
+}
+
+/**
+* Récupération des informations nécessaires à la page
+* https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+*/
+export async function getStaticProps({params}) {
+  const { data : casClients } = await BackendService.findAllCasClients();
+  const { data : servicesList } = await BackendService.findServicesAll();
+  return {
+    props: {
+      casClients,
+      servicesList,
+    }
+  };
 }
 
 export default Index;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BackendService from '../../services/Backend.service';
 import Router from 'next/router';
+import Link from 'next/link';
 
 class SectionCasClients extends Component {
 
@@ -14,21 +15,9 @@ class SectionCasClients extends Component {
         };
     }
 
-    componentDidMount() {
-        BackendService.findAllCasClients().
-            then(casClients => {
-                this.setState({ casClients: casClients.data });
-            });
-    }
-
-    detail(product) {
- 
-      window.location.href = "/cas-clients/" + product.permaliens
-    }
-
- 
     render() {
-        const { casClients, infoMessage, errorMessage } = this.state;
+        const { casClients } = this.props;
+        const { infoMessage, errorMessage } = this.state;
 
         let Fichelist = casClients.map((casClient, i) => {
             return (
@@ -36,14 +25,16 @@ class SectionCasClients extends Component {
                     <div className="service-grid-item service-grid-item--style2">
                         <div className="service-grid-item__image">
                             <div className="service-grid-item__image-wrapper">
-                                <a onClick={() => this.detail(casClient)}>
+                                <Link href={`/cas-clients/${casClient.permaliens}`}>
+                                    <a>
                                      {casClient.adresseImageCasUtilisation ? <img src={`https://ns3296606.ip-5-135-152.eu:8443/api/file/` + casClient.adresseImageCasUtilisation} className="img-fluid" alt="" style={{ maxWidth: "250px" }} /> : <img src={require(`../../images/blog/1.jpg`)} className="img-fluid" alt="tbl" />}
-                                </a>
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="service-grid-item__content">
                             <h3 className="title">
-                                <a onClick={() => this.detail(casClient)}>{casClient.titreCasUtilisation}</a>
+                                <Link href={`/cas-clients/${casClient.permaliens}`}><a>{casClient.titreCasUtilisation}</a></Link>
                             </h3>
                             <p>{casClient.subtitleCasUtilisation}</p>
                         </div>

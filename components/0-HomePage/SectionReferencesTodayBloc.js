@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BackendService from '../../services/Backend.service';
+import Link from 'next/link';
 
 class SectionReferencesTodayBloc extends Component {
 
@@ -32,11 +33,8 @@ class SectionReferencesTodayBloc extends Component {
    }
  
     render() {
-
-        const { casClients, infoMessage, errorMessage } = this.state;
- 
-
- 
+        const { casClients } = this.props;
+        const { infoMessage, errorMessage } = this.state;
 
         let Datalist = casClients.map((casClient, i)=>{
             return(
@@ -76,7 +74,7 @@ class SectionReferencesTodayBloc extends Component {
                                 </div>
 
                                 <div className="row ">
-                                <a href="/cas-clients" className="ht-btn ht-btn--round">LES CAS CLIENTS</a>
+                                <Link href="/cas-clients"><a className="ht-btn ht-btn--round">LES CAS CLIENTS</a></Link>
                                 </div>
                             </div>
                         </div>

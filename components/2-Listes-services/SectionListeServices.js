@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link'
 import BackendService from '../../services/Backend.service';
 
 class SectionListeServices extends Component {
@@ -13,36 +14,26 @@ class SectionListeServices extends Component {
         };
     }
 
-    componentDidMount() {
-        BackendService.findServicesAll().
-            then(servicesList => {
-                this.setState({ servicesList: servicesList.data });
-            });
-    }
-
-    detail(product) {
-
-        window.location.href = "/prestations/" + product.permaliens
-    }
-
-
     render() {
-        const { servicesList, infoMessage, errorMessage } = this.state;
+        const { servicesList } = this.props;
+        const { infoMessage, errorMessage } = this.state;
 
-        let Fichelist = servicesList.map((fiche, i) => {
+        let Fichelist = (servicesList || []).map((fiche, i) => {
             return (
                 <div className="col-lg-4 col-sm-6 col-12 section-space--bottom--30" key={i}>
                     <div className="service-grid-item service-grid-item--style2">
                         <div className="service-grid-item__image">
                             <div className="service-grid-item__image-wrapper">
-                                <a onClick={() => this.detail(fiche)}>
-                                    {fiche.adresseLogo ? <img src={`https://ns3296606.ip-5-135-152.eu:8443/api/file/` + fiche.adresseLogo} className="img-fluid" alt="" style={{ maxWidth: "250px" }} /> : <img src={require(`../../images/blog/1.jpg`)} className="img-fluid" alt="tbl" />}
-                                </a>
+                                <Link href={`/prestations/${fiche.permaliens}`}>
+                                    <a>
+                                        {fiche.adresseLogo ? <img src={`https://ns3296606.ip-5-135-152.eu:8443/api/file/` + fiche.adresseLogo} className="img-fluid" alt="" style={{ maxWidth: "250px" }} /> : <img src={require(`../../images/blog/1.jpg`)} className="img-fluid" alt="tbl" />}
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="service-grid-item__content">
                             <h3 className="title">
-                                <a onClick={() => this.detail(fiche)}>{fiche.titrePage} - {fiche.nomEntreprise}</a>
+                                <Link href={`/prestations/${fiche.permaliens}`}><a>{fiche.titrePage} - {fiche.nomEntreprise}</a></Link>
                             </h3>
                             <p>{fiche.phraseAccroche}</p>
                         </div>

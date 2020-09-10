@@ -1,20 +1,16 @@
 import axios from 'axios';
-import NavBar from '../../components/Layouts/NavbarOtherPage'
- 
 import { useRouter } from 'next/router'
-
- 
-
 import ModalVideo from 'react-modal-video'
+import DocumentMeta from 'react-document-meta';
+import Swal from 'sweetalert2';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
- 
+import NavBar from '../../components/Layouts/NavbarOtherPage'
 import Breadcrumbs from '../../components/Layouts/Breadcrumbs'
- import DocumentMeta from 'react-document-meta';
- import Swal from 'sweetalert2';
- import Error from '../error';
 
+import Error from '../error';
 
- import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import BackendService from '../../services/Backend.service';
 
 const openModal = () => {
     this.setState({isOpen: false})
@@ -28,7 +24,6 @@ function isOpen (){
 
 const CasClients = ({ casclient }) => {
 
-    console.log(casclient)
     const meta = {
         title: casclient.metadataSeoTitlePage,
         description: casclient.metadataSeoDescriptionPage,
@@ -117,54 +112,33 @@ const CasClients = ({ casclient }) => {
     );
 }
 
-CasClients.getInitialProps = async ({ query: {id}, res }) => {
-   console.log(id)
-   //  id = "traitement-automatique-des-requ%C3%AAtes-clients" ;
-   //  console.log(id)
-    const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/cas-utilisation/permaliens?permaliens=`+id ;
- //   const payload = { params: { id } }
-    // const response = await axios.get(url);
- 
-    // Swal.fire(
-    //     'Super!',
-    //     'Votre message est envoyé' + response.status,
-    //     'success'
-    // )
 
-    // if(response){
-    //     console.log(response)
-    //     return {
-    //          fiche: response.data[0]
-    //     }
-    
-    // }
+/**
+ * Récupération de la liste des routes dynamique (id de chaque route)
+ * https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+ */
+export async function getStaticPaths() {
+    const { data : casclients} = await BackendService.findAllCasClients();
+    return {
+        paths: casclients.map(casclient => ({
+            params: { id: casclient.permaliens },
+        })),
+        fallback: false // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
+    };
+}
 
-
-    try {
-        // fetch data from a url endpoint
-        const response = await axios.get(url);
-        console.log(response)
-
-         return {
-            casclient: response.data[0]
-       }
-
-      } catch (error) {
-    //    alert(error); // catches both errors
-     //   console.log("error", error);
-        // appropriately handle the error
-      //  window.location.href= "/error"
-      //  return fiche ; 
-
+/**
+ * Récupération des informations pour un id spécifique
+ * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+ */
+export async function getStaticProps({params}) {
+    const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/cas-utilisation/permaliens?permaliens=`+params.id ;
+    const { data: casclients } = await axios.get(url);
+    return {
+      props: {
+        casclient: casclients[0]
+      }
     }
-
-    // if (res) {
-    //     res.statusCode = 404
-    //     res.end('Not found')
-    //     return
-    //  }
-
-    
 }
 
 export default CasClients;

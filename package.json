@@ -4,10 +4,11 @@
     "description": "TESTS",
     "main": "index.js",
     "scripts": {
-        "dev": "next",
+        "dev": "next dev",
         "build": "next build && next export",
         "start": "next start",
-        "export": "next export"
+        "export": "next export",
+        "serve": "node server.js"
     },
     "author": "",
     "license": "ISC",

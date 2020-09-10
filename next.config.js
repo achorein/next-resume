@@ -7,28 +7,28 @@ const withVideos = require('next-videos');
 const fetch = require('isomorphic-unfetch');
 
 const nextJsConfig = {
-    exportTrailingSlash: true,
-    exportPathMap: async function() {
+    trailingSlash: true,
+    // exportPathMap: async function() {
 
 
-        const paths = {
-            '/': { page: '/' },
-            '/qui-sommes-nous' : { page : '/qui-sommes-nous'},
-            '/cas-clients' : { page : '/cas-clients'},
-            '/prestations' : { page : '/prestations'},
+    //     const paths = {
+    //         '/': { page: '/' },
+    //         '/qui-sommes-nous' : { page : '/qui-sommes-nous'},
+    //         '/cas-clients' : { page : '/cas-clients'},
+    //         '/prestations' : { page : '/prestations'},
  
-            '/error': { page: '/error' }
-        }; 
-        // const res = await fetch('https://ns3296606.ip-5-135-152.eu:8443/api/user/services/all');
-        // const data = await res.json();
-        // const fiches = data.map(entry => entry.show);
-    //    console.log(data)
-        // fiches.forEach(fiche => {
-        //   paths[`/prestations/${fiche.permalien}`] = { page: '/prestations/[id]', query: { id: fiche.permalien } };
-        // });
-        return paths;
+    //         '/error': { page: '/error' }
+    //     }; 
+    //     // const res = await fetch('https://ns3296606.ip-5-135-152.eu:8443/api/user/services/all');
+    //     // const data = await res.json();
+    //     // const fiches = data.map(entry => entry.show);
+    // //    console.log(data)
+    //     // fiches.forEach(fiche => {
+    //     //   paths[`/prestations/${fiche.permalien}`] = { page: '/prestations/[id]', query: { id: fiche.permalien } };
+    //     // });
+    //     return paths;
             
-    }
+    // }
 }
 
 module.exports = withPlugins([

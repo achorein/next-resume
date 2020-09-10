@@ -4,12 +4,14 @@ import NavBar from '../components/Layouts/NavbarOtherPage'
 import Breadcrumbs from '../components/Layouts/Breadcrumbs'
 import SectionListeServices from '../components/2-Listes-services/SectionListeServices'
 import DocumentMeta from 'react-document-meta';
+import BackendService from '../services/Backend.service';
 
  
 
 class ServicesPages extends Component {
 
     render() {
+      const { servicesList } = this.props;
         const meta = {
             title: 'Safiyoudine.FR',
             description: 'Safiyoudine.FR',
@@ -25,18 +27,28 @@ class ServicesPages extends Component {
 
         return (
             <React.Fragment>
-                  <DocumentMeta {...meta}>
-       </DocumentMeta>
+                <DocumentMeta {...meta} />
                 
                 <NavBar />
 
                 <Breadcrumbs titlePage="Liste des services" />
-                <SectionListeServices /> 
-                  
-
+                <SectionListeServices servicesList={servicesList} /> 
             </React.Fragment>
         );
     }
+}
+
+/**
+* Récupération des informations nécessaires à la page
+* https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+*/
+export async function getStaticProps({params}) {
+  const { data : servicesList } = await BackendService.findServicesAll();
+  return {
+    props: {
+      servicesList
+    }
+  };
 }
 
 export default ServicesPages;

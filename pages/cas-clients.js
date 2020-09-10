@@ -4,12 +4,14 @@ import NavBar from '../components/Layouts/NavbarOtherPage'
 import Breadcrumbs from '../components/Layouts/Breadcrumbs'
 import SectionListeCasClients from '../components/3-CasClients/SectionListeCasClients'
 import DocumentMeta from 'react-document-meta';
+import BackendService from '../services/Backend.service';
 
  
 
 class CasClients extends Component {
 
     render() {
+        const { casClients } = this.props;
         const meta = {
             title: 'Cas Clients- Safiyoudine',
             description: 'Safiyoudine.FR',
@@ -25,18 +27,28 @@ class CasClients extends Component {
 
         return (
             <React.Fragment>
-                  <DocumentMeta {...meta}>
-       </DocumentMeta>
-                
+                <DocumentMeta {...meta} />
+
                 <NavBar />
 
                 <Breadcrumbs titlePage="Cas Clients" />
-                <SectionListeCasClients /> 
-                  
-
+                <SectionListeCasClients casClients={casClients} /> 
             </React.Fragment>
         );
     }
+}
+
+/**
+* Récupération des informations nécessaires à la page
+* https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+*/
+export async function getStaticProps({params}) {
+  const { data : casClients } = await BackendService.findAllCasClients();
+  return {
+    props: {
+      casClients,
+    }
+  };
 }
 
 export default CasClients;

@@ -5,10 +5,11 @@
     "main": "index.js",
     "scripts": {
         "dev": "next dev",
-        "build": "next build && next export",
+        "build": "next build && next export && npm run sitemap",
         "start": "next start",
         "export": "next export",
-        "serve": "node server.js"
+        "serve": "node server.js",
+        "sitemap": "node ./scripts/generate-sitemap.js"
     },
     "author": "",
     "license": "ISC",
@@ -27,6 +28,7 @@
         "bootstrap": "^4.5.0",
         "express": "^4.17.1",
         "formik": "^2.1.5",
+        "globby": "^11.0.1",
         "imagemin-mozjpeg": "^8.0.0",
         "imagemin-optipng": "^7.1.0",
         "imagemin-svgo": "^7.1.0",

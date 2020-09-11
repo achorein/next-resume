@@ -1,3 +1,4 @@
+// cf. https://nextjs.org/docs/basic-features/built-in-css-support#sass-support
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/animate.min.css';
 // import '../assets/css/flaticon.css';
@@ -10,6 +11,7 @@ import '../node_modules/react-modal-video/css/modal-video.min.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
 
 import App from 'next/app';
+// cf: https://github.com/garmeeh/next-seo
 import { DefaultSeo } from 'next-seo';
 
 export default class MyApp extends App {

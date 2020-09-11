@@ -1,5 +1,5 @@
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
+// const withSass = require('@zeit/next-sass');
+// const withCSS = require('@zeit/next-css');
 const withFonts = require('next-fonts');
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
@@ -7,6 +7,9 @@ const withVideos = require('next-videos');
 
 const nextJsConfig = {
   trailingSlash: true,
+  // sassOptions: {
+  //   includePaths: [path.join(__dirname, 'styles')],
+  // },
 };
 
 module.exports = withPlugins([
@@ -36,9 +39,7 @@ module.exports = withPlugins([
       },
     },
   ],
-  [withCSS],
   [withFonts],
-  [withSass],
   [withVideos],
   nextJsConfig,
 ]);

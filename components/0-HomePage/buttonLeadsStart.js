@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 import Swal from 'sweetalert2';
-import '../stylesButton.css';
-import '../stylesButtonRadio.css';
 import fetch from 'isomorphic-fetch';
 
-import { object } from 'prop-types';
 import Backend from '../../services/Backend.service';
+
+// cf. https://nextjs.org/docs/basic-features/built-in-css-support#adding-component-level-css
+import './buttonLeadsStart.module.css';
 
 class buttonLeadsStart extends Component {
   constructor(props) {

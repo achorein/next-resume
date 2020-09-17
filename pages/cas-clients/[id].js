@@ -106,21 +106,34 @@ CasClients.propTypes = {
  * Récupération de la liste des routes dynamique (id de chaque route)
  * https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
  */
-export async function getStaticPaths() {
-  const { data: casclients } = await BackendService.findAllCasClients();
-  return {
-    paths: casclients.map((casclient) => ({
-      params: { id: casclient.permaliens },
-    })),
-    fallback: false, // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
-  };
-}
+// export async function getStaticPaths() {
+//   const { data: casclients } = await BackendService.findAllCasClients();
+//   return {
+//     paths: casclients.map((casclient) => ({
+//       params: { id: casclient.permaliens },
+//     })),
+//     fallback: false, // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
+//   };
+// }
 
 /**
  * Récupération des informations pour un id spécifique
  * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
  */
-export async function getStaticProps({ params }) {
+// export async function getStaticProps({ params }) {
+//   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/cas-utilisation/permaliens?permaliens=${params.id}`;
+//   const { data: casclients } = await axios.get(url);
+//   return {
+//     props: {
+//       casclient: casclients[0],
+//     },
+//   };
+// }
+
+/**
+ * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
+ */
+export async function getServerSideProps({ params }) {
   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/cas-utilisation/permaliens?permaliens=${params.id}`;
   const { data: casclients } = await axios.get(url);
   return {

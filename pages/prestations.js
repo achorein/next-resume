@@ -36,9 +36,9 @@ class ServicesPages extends PureComponent {
 
 /**
  * Récupération des informations nécessaires à la page
- * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+ * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
  */
-export async function getStaticProps({ params }) {
+export async function getServerSideProps() {
   const { data: servicesList } = await BackendService.findServicesAll();
   return {
     props: {

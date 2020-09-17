@@ -15,11 +15,11 @@ import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    return {
-      pageProps: Component.getInitialProps ? await Component.getInitialProps(ctx) : {},
-    };
-  }
+  // static async getInitialProps({ Component, ctx }) {
+  //   return {
+  //     pageProps: Component.getInitialProps ? await Component.getInitialProps(ctx) : {},
+  //   };
+  // }
 
   // Preloader
   state = {

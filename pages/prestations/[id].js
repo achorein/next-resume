@@ -103,25 +103,39 @@ const Prestations = ({ fiche }) => {
   );
 };
 
-/**
- * Récupération de la liste des routes dynamique (id de chaque route)
- * https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
- */
-export async function getStaticPaths() {
-  const { data: servicesList } = await BackendService.findServicesAll();
-  return {
-    paths: servicesList.map((fiche) => ({
-      params: { id: fiche.permaliens },
-    })),
-    fallback: false, // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
-  };
-}
+// /**
+//  * Récupération de la liste des routes dynamique (id de chaque route)
+//  * https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+//  */
+// export async function getStaticPaths() {
+//   const { data: servicesList } = await BackendService.findServicesAll();
+//   return {
+//     paths: servicesList.map((fiche) => ({
+//       params: { id: fiche.permaliens },
+//     })),
+//     fallback: false, // false: page 404, true: gestion d'un comportement spécifique (https://nextjs.org/docs/basic-features/data-fetching#fallback-pages)
+//   };
+// }
+
+// /**
+//  * Récupération des informations pour un id spécifique
+//  * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+//  */
+// export async function getStaticProps({ params }) {
+//   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/services/permaliens?permaliens=${params.id}`;
+//   const { data: fiches } = await axios.get(url);
+//   return {
+//     props: {
+//       fiche: fiches[0],
+//     },
+//   };
+// }
 
 /**
  * Récupération des informations pour un id spécifique
- * https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+ * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
  */
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/services/permaliens?permaliens=${params.id}`;
   const { data: fiches } = await axios.get(url);
   return {

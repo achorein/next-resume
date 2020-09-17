@@ -5,11 +5,10 @@
     "main": "index.js",
     "scripts": {
         "dev": "next dev",
-        "build": "next build && next export && npm run sitemap",
+        "build": "next build",
         "start": "next start",
         "export": "next export",
         "serve": "node server.js",
-        "sitemap": "node ./scripts/generate-sitemap.js",
         "lint": "eslint **/*.{js,jsx} --ignore-path .gitignore",
         "lint:fix": "eslint **/*.{js,jsx} --ignore-path .gitignore --fix"
     },

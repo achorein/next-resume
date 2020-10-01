@@ -4,12 +4,16 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import DocumentMeta from 'react-document-meta';
 
+import Page404 from '../404';
 import NavBar from '../../components/Layouts/NavbarOtherPage';
 import Breadcrumbs from '../../components/Layouts/Breadcrumbs';
 
 import BackendService from '../../services/Backend.service';
 
-const Prestations = ({ fiche }) => {
+const Prestations = ({ fiche, error }) => {
+  if (error) {
+    return <Page404 />;
+  }
   const meta = {
     title: fiche.metadataSeoTitlePage,
     description: fiche.metadataSeoDescriptionPage,
@@ -135,14 +139,26 @@ const Prestations = ({ fiche }) => {
  * Récupération des informations pour un id spécifique
  * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
  */
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, res }) {
   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/services/permaliens?permaliens=${params.id}`;
-  const { data: fiches } = await axios.get(url);
-  return {
-    props: {
-      fiche: fiches[0],
-    },
-  };
+  try {
+    const { data: fiches } = await axios.get(url);
+    if (fiches.length === 0) {
+      throw new Error();
+    }
+    return {
+      props: {
+        fiche: fiches[0],
+      },
+    };
+  } catch (err) {
+    res.statusCode = 404;
+    return {
+      props: {
+        error: 404,
+      },
+    };
+  }
 }
 
 export default Prestations;

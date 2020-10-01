@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import DocumentMeta from 'react-document-meta';
 import ReactHtmlParser from 'react-html-parser';
 
+import Page404 from '../404';
 import NavBar from '../../components/Layouts/NavbarOtherPage';
 import Breadcrumbs from '../../components/Layouts/Breadcrumbs';
 
 import BackendService from '../../services/Backend.service';
 
-const CasClients = ({ casclient }) => {
+const CasClients = ({ casclient, error }) => {
+  if (error) {
+    return <Page404 />;
+  }
   const meta = {
     title: casclient.metadataSeoTitlePage,
     description: casclient.metadataSeoDescriptionPage,
@@ -99,7 +103,13 @@ CasClients.propTypes = {
     adresseImageCasUtilisation: PropTypes.string.isRequired,
     titreCasUtilisation: PropTypes.string.isRequired,
     descriptionCasUtilisation: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+  error: PropTypes.number,
+};
+
+CasClients.defaultProps = {
+  casclient: undefined,
+  error: undefined,
 };
 
 /**
@@ -133,14 +143,26 @@ CasClients.propTypes = {
 /**
  * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
  */
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, res }) {
   const url = `https://ns3296606.ip-5-135-152.eu:8443/api/user/cas-utilisation/permaliens?permaliens=${params.id}`;
-  const { data: casclients } = await axios.get(url);
-  return {
-    props: {
-      casclient: casclients[0],
-    },
-  };
+  try {
+    const { data: casclients } = await axios.get(url);
+    if (casclients.length === 0) {
+      throw new Error();
+    }
+    return {
+      props: {
+        casclient: casclients[0],
+      },
+    };
+  } catch (err) {
+    res.statusCode = 404;
+    return {
+      props: {
+        error: 404,
+      },
+    };
+  }
 }
 
 export default CasClients;
